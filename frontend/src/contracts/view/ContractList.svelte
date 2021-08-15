@@ -1,7 +1,7 @@
 <script lang="ts">
     import ContractRow from './ContractRow.svelte';
-    import Paginator from "../../utils/Paginator.svelte";
-    import Error from "../../utils/Error.svelte";
+    import Paginator from "../../Paginator.svelte";
+    import Error from "../../Error.svelte";
     import DataLoader from "../../data/DataLoader";
 
     let contractsNumberPromise = DataLoader.getContractsNumber();
