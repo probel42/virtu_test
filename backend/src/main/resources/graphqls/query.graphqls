@@ -1,0 +1,19 @@
+type Query {
+    countries: [Country]
+    country(name: String!): Country
+
+    persons(search: String!): [Person]
+    person(id: ID!): Person
+    contractsNumber: Int!
+    contracts(page: Int!, size: Int!): [Contract]
+    contract(id: ID!): Contract
+    realPropertyTypes: [String]
+    calcInsurancePremium(
+        insuranceAmount: Int!,
+        realPropertyType: String!,
+        year: String!,
+        area: Int!,
+        dateFrom: String!,
+        dateTo: String!
+    ): Float
+}

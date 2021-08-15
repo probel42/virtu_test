@@ -1,0 +1,29 @@
+type Country {
+    name: String
+    subjects: [Subject]
+    subject(name: String!): Subject
+}
+
+type Subject {
+    name: String
+    districts: [District]
+    district(name: String!): District
+    settlements: [Settlement]
+    settlement(name: String!): Settlement
+}
+
+type District {
+    name: String
+    settlements: [Settlement]
+    settlement(name: String!): Settlement
+}
+
+type Settlement {
+    name: String
+    streets: [Street]
+    street(name: String!): Street
+}
+
+type Street {
+    name: String
+}

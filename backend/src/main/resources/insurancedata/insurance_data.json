@@ -1,0 +1,44 @@
+{
+    "realPropertyTypeCoefficient": [
+        {
+            "type": "Квартира",
+            "coefficient": 1.7
+        },
+        {
+            "type": "Дом",
+            "coefficient": 1.5
+        },
+        {
+            "type": "Комната",
+            "coefficient": 1.3
+        }
+    ],
+    "yearCoefficient": [
+        {
+            "beforeYear": null,
+            "coefficient": 2.0
+        },
+        {
+            "beforeYear": 2015,
+            "coefficient": 1.6
+        },
+        {
+            "beforeYear": 2000,
+            "coefficient": 1.3
+        }
+    ],
+    "areaCoefficient": [
+        {
+            "lessThan": 50,
+            "coefficient": 1.2
+        },
+        {
+            "lessThan": 101,
+            "coefficient": 1.5
+        },
+        {
+            "lessThan": null,
+            "coefficient": 2.0
+        }
+    ]
+}

@@ -1,0 +1,45 @@
+type Address {
+    id: ID
+    zipCode: String
+    country: String
+    subject: String
+    district: String
+    settlement: String
+    street: String
+    plot: String
+    building: String
+    housing: String
+    apartment: String
+}
+
+type RealProperty {
+    id: ID
+    address: Address
+    type: String
+    year: String
+    area: Int
+}
+
+type Person {
+    id: ID
+    name: String
+    surname: String
+    patronymic: String
+    birthDate: String
+    passportSeries: String
+    passportNumber: String
+}
+
+type Contract {
+    id: ID
+    number: Int
+    signDate: String
+    insured: Person
+    realProperty: RealProperty
+    insuranceAmount: Int
+    dateFrom: String
+    dateTo: String
+    calcDate: String
+    calcPremium: Float
+    comment: String
+}

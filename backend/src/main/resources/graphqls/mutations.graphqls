@@ -1,0 +1,4 @@
+type Mutation {
+    addEditPerson(person: PersonInput!): String
+    addEditContract(contract: ContractInput!): String
+}

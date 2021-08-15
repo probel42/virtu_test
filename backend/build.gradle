@@ -1,0 +1,45 @@
+plugins {
+    id 'org.springframework.boot' version '2.5.3'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'war'
+}
+
+group = 'ru.ibelan.test'
+version = '1.0'
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    springBootVersion = '2.5.3'
+    springGraphQLVersion = '5.0.2'
+    graphQLJavaToolsVersion = '5.2.4'
+    flywayVersion = '7.12.1'
+    luceneVersion = '8.9.0'
+    lombokVersion = '1.18.20'
+    postgresJDBCVersion = '42.2.23'
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-data-mongodb:${springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    implementation "com.graphql-java:graphql-spring-boot-starter:${springGraphQLVersion}"
+    implementation "com.graphql-java:graphql-java-tools:${graphQLJavaToolsVersion}"
+    implementation "org.apache.lucene:lucene-core:${luceneVersion}"
+    implementation "org.apache.lucene:lucene-queryparser:${luceneVersion}"
+    implementation "org.apache.lucene:lucene-analyzers-common:${luceneVersion}"
+    implementation "org.flywaydb:flyway-core:${flywayVersion}"
+    runtimeOnly "org.postgresql:postgresql:${postgresJDBCVersion}"
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    providedRuntime "org.springframework.boot:spring-boot-starter-tomcat:${springBootVersion}"
+    testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+}
+
+test {
+    useJUnitPlatform()
+}
