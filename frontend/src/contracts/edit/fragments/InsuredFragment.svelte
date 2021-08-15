@@ -8,7 +8,7 @@
     let searchResult: Person[] = [];
 
     $: person = contract?.insured;
-    $: isPersonSet = !!person;
+    $: isPersonSet = !!person?.id;
     $: DataLoader.searchPerson(searchLine).then((result) => searchResult = result.persons);
 
     const changePerson = () => contract.insured = null;

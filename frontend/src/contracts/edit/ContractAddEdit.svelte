@@ -10,6 +10,7 @@
     import {mutation} from "svelte-apollo";
     import {SAVE_CONTRACT} from "../../data/Queries";
     import Converter from "../../data/Converter";
+    import {NewContract} from "../../data/DataTemplates";
 
     export let params = null;
 
@@ -17,7 +18,7 @@
     $: if (params?.id) {
         DataLoader.loadContract(params?.id).then(data => contract = data.contract);
     } else {
-        contract = {};
+        contract = NewContract;
     }
 
     const createOrUpdateContract = mutation(SAVE_CONTRACT);
@@ -25,7 +26,7 @@
     const backToContracts = () => window.location.href = '';
     const saveContract = async () => {
         const opts = {variables: {contract: Converter.getContractInput(contract)}};
-        createOrUpdateContract(opts).then(backToContracts);
+        createOrUpdateContract(opts).then(backToContracts).catch((message) => alert(message));
     }
 </script>
 
