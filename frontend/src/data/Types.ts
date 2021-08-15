@@ -50,3 +50,17 @@ export type CalcInsuranceVariables = {
     dateFrom?: String,
     dateTo?: String
 }
+
+export type ContractInput = {
+    id?: String
+    number?: number;
+    signDate?: String;
+    insuredId?: String;
+    realProperty?: RealProperty;
+    insuranceAmount?: number;
+    dateFrom?: String;
+    dateTo?: String;
+    calcDate?: String;
+    calcPremium?: number;
+    comment?: String;
+}

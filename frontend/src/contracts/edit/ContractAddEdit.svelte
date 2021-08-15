@@ -7,6 +7,9 @@
     import AddressFragment from "./fragments/AddressFragment.svelte";
     import CommentFragment from "./fragments/CommentFragment.svelte";
     import type {Contract} from "../../data/Types";
+    import {mutation} from "svelte-apollo";
+    import {SAVE_CONTRACT} from "../../data/Queries";
+    import Converter from "../../data/Converter";
 
     export let params = null;
 
@@ -17,15 +20,13 @@
         contract = {};
     }
 
-    // const createOrUpdateContract = mutation(SAVE_CONTRACT);
-
-    const saveContract = async () => {
-        // const opts = { variables: { contract: contract } }
-        // let result = await createOrUpdateContract(opts);
-        backToContracts();
-    }
+    const createOrUpdateContract = mutation(SAVE_CONTRACT);
 
     const backToContracts = () => window.location.href = '';
+    const saveContract = async () => {
+        const opts = {variables: {contract: Converter.getContractInput(contract)}};
+        createOrUpdateContract(opts).then(backToContracts);
+    }
 </script>
 
 {#if contract}

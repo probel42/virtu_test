@@ -116,7 +116,7 @@ export const GET_COUNTRIES = gql`
 `
 
 export const SAVE_CONTRACT = gql`
-    mutation AddEditContract($contract: Contract) {
+    mutation AddEditContract($contract: ContractInput!) {
         addEditContract(contract: $contract)
     }
 `
