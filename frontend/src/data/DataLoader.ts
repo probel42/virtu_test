@@ -26,6 +26,11 @@ export default class DataLoader {
         return this.createPromise(query(Queries.SEARCH_PERSONS, opts));
     }
 
+    public static loadPerson(id: String): Promise<{ person: Person }> {
+        const opts = {variables: {id: id}};
+        return this.createPromise(query(Queries.GET_PERSON, opts));
+    }
+
     public static getRealPropertyTypes(): Promise<{ realPropertyTypes: String[] }> {
         return this.createPromise(query(Queries.GET_REAL_PROPERTY_TYPES));
     }

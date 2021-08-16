@@ -24,7 +24,7 @@
     const createOrUpdateContract = mutation(SAVE_CONTRACT);
 
     const backToContracts = () => window.location.href = '';
-    const saveContract = async () => {
+    const saveContract = () => {
         const opts = {variables: {contract: Converter.getContractInput(contract)}};
         createOrUpdateContract(opts).then(backToContracts).catch((message) => alert(message));
     }

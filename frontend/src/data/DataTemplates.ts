@@ -1,4 +1,4 @@
-import type {Contract} from "./Types";
+import type {Contract, Person} from "./Types";
 
 export let NewContract: Contract = {
     realProperty: {
@@ -7,4 +7,6 @@ export let NewContract: Contract = {
         }
     },
     insured: {}
-}
+};
+
+export let NewPerson: Person = {};

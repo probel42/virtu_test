@@ -93,6 +93,19 @@ export const CALC_INSURANCE_PREMIUM = gql`
     }
 `
 
+export const GET_PERSON = gql`
+    query GetPerson($id: ID!) {
+        person(id: $id) {
+            surname
+            name
+            patronymic
+            birthDate
+            passportSeries
+            passportNumber
+        }
+    }
+`
+
 export const SEARCH_PERSONS = gql`
     query SearchPersons($search: String!) {
         persons(search: $search) {
@@ -104,6 +117,12 @@ export const SEARCH_PERSONS = gql`
             passportSeries
             passportNumber
         }
+    }
+`
+
+export const SAVE_PERSON = gql`
+    query AddEditPerson($person: PersonInput!) {
+        addEditPerson(person: $person)
     }
 `
 
