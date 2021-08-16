@@ -1,4 +1,4 @@
-import type {CalcInsuranceVariables, Contract, Person} from "./Types";
+import type {Contract, Person} from "./Types";
 import * as Queries from "./Queries";
 import {query, ReadableQuery} from "svelte-apollo";
 
@@ -30,9 +30,9 @@ export default class DataLoader {
         return this.createPromise(query(Queries.GET_REAL_PROPERTY_TYPES));
     }
 
-    public static calcInsurancePremium(variables: CalcInsuranceVariables): Promise<{ calcInsurancePremium: number }> {
-        const opts = {variables: variables};
-        return this.createPromise(query(Queries.CALC_INSURANCE_PREMIUM, opts));
+    public static calcInsurancePremium(): (opts) => Promise<{ data: { calcInsurancePremium: number } }> {
+        const q = query(Queries.CALC_INSURANCE_PREMIUM);
+        return (opts) => q.refetch(opts);
     }
 
     public static getCountries(): Promise<{ countries: [{ name: String }] }> {
