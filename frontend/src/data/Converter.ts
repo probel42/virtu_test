@@ -1,4 +1,4 @@
-import type {Contract, ContractInput} from "./Types";
+import type {Contract, ContractInput, Person, PersonInput} from "./Types";
 
 export default class Converter {
     public static getContractInput(contract: Contract): ContractInput {
@@ -31,5 +31,17 @@ export default class Converter {
             calcPremium: contract.calcPremium,
             comment: contract.comment
         };
+    }
+
+    public static getPersonInput(person: Person): PersonInput {
+        return {
+            id: person.id,
+            name: person.name,
+            surname: person.surname,
+            patronymic: person.patronymic,
+            birthDate: person.birthDate,
+            passportSeries: person.passportSeries,
+            passportNumber: person.passportNumber
+        }
     }
 }

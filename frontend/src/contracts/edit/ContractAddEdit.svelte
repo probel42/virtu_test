@@ -11,6 +11,7 @@
     import {SAVE_CONTRACT} from "../../data/Queries";
     import Converter from "../../data/Converter";
     import {NewContract} from "../../data/DataTemplates";
+    import {closeModal, Modals} from 'svelte-modals';
 
     export let params = null;
 
@@ -22,7 +23,6 @@
     }
 
     const createOrUpdateContract = mutation(SAVE_CONTRACT);
-
     const backToContracts = () => window.location.href = '';
     const saveContract = () => {
         const opts = {variables: {contract: Converter.getContractInput(contract)}};
@@ -30,6 +30,20 @@
     }
 </script>
 
+<style>
+    .backdrop {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.50)
+    }
+</style>
+
+<Modals>
+    <div slot="backdrop" class="backdrop" on:click={closeModal}></div>
+</Modals>
 {#if contract}
     <TitleFragment {contract}/>
     <CalculationFragment {contract}/>

@@ -121,7 +121,7 @@ export const SEARCH_PERSONS = gql`
 `
 
 export const SAVE_PERSON = gql`
-    query AddEditPerson($person: PersonInput!) {
+    mutation AddEditPerson($person: PersonInput!) {
         addEditPerson(person: $person)
     }
 `

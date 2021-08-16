@@ -1,6 +1,8 @@
 <script lang="ts">
     import type {Contract, Person} from "../../../data/Types";
     import DataLoader from "../../../data/DataLoader";
+    import {openModal} from 'svelte-modals'
+    import PersonAddEdit from './PersonAddEdit.svelte'
 
     export let contract: Contract;
 
@@ -20,6 +22,7 @@
     }
 
     const clearSearch = () => searchLine = '';
+    const openPersonAddEditDialog = () => openModal(PersonAddEdit, {person: person, setPerson: setPerson});
 </script>
 
 <style>
@@ -96,12 +99,12 @@
                     <td>Пасспорт: {person.passportSeries} {person.passportNumber}</td>
                 </tr>
             </table>
-            <button class="personButton">Ред.</button>
+            <button class="personButton" on:click={openPersonAddEditDialog}>Ред.</button>
         </div>
     {:else}
         <div class="personPanel">
             <input type="search" placeholder="Поиск персон в базе..." spellcheck="false" bind:value={searchLine}/>
-            <button class="personButton">+</button>
+            <button class="personButton" on:click={openPersonAddEditDialog}>+</button>
         </div>
         {#if searchResult.length > 0}
             <div id="searchDropListWrapper">
