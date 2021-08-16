@@ -103,13 +103,13 @@ public class ContractServiceImpl implements ContractService {
         //  отделена от сущности "адрес"), но для этого нужны какие-то дополнительные идентификаторы
 
         Person person = personRepository.findById(UUID.fromString(personId))
-                .orElseThrow(() -> new RuntimeException("Не найдена указанная в договоре персона."));
+                .orElseThrow(() -> new CalcInsuranceException("Не найдена указанная в договоре персона."));
 
         // пересчитаем премию заново (на случай если коэффициенты расчёта были изменены)
         Float insurancePremium = calcInsurancePremium(contractInput.getInsuranceAmount(), realPropertyType, year,
                 area.intValue(), contractInput.getDateFrom(), contractInput.getDateTo());
         if (!Objects.equals(insurancePremium, contractInput.getCalcPremium())) {
-            throw new RuntimeException("Необходим перерасчёт страховой премии");
+            throw new CalcInsuranceException("Необходим перерасчёт страховой премии");
         }
 
         Contract contract = createOrUpdateContract(contractInput, realProperty, person);

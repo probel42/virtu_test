@@ -36,11 +36,6 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public List<Person> getPersons(List<String> ids) {
-        return personRepository.findAllById(ids.stream().map(UUID::fromString).collect(Collectors.toList()));
-    }
-
-    @Override
     public Person getPerson(String id) {
         return personRepository.findById(UUID.fromString(id)).orElse(null);
     }
