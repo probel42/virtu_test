@@ -5,7 +5,8 @@
     import ContractAddEdit from "./contracts/edit/ContractAddEdit.svelte";
     import Router from 'svelte-spa-router'
 
-    const client = new ApolloClient({uri: 'http://localhost:8080/'});
+    const env = _env;
+    const client = new ApolloClient({uri: env.SERVER_URI});
     setClient(client);
 
     const routes = {
@@ -16,7 +17,7 @@
 </script>
 
 <body>
-    <Router {routes}/>
+<Router {routes}/>
 </body>
 
 <style>

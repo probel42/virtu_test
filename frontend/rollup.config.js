@@ -4,6 +4,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
+import replace from '@rollup/plugin-replace';
 import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
 import graphql from '@rollup/plugin-graphql';
@@ -66,6 +67,12 @@ export default {
 		typescript({
 			sourceMap: !production,
 			inlineSources: !production
+		}),
+
+		replace({
+			_env: JSON.stringify({
+				SERVER_URI: process.env.SERVER_URI
+			}),
 		}),
 
 		// In dev mode, call `npm run start` once
