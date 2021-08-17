@@ -1,6 +1,6 @@
 <script lang="ts">
-    import type {Contract} from "../../../data/Types";
-    import DataLoader from "../../../data/DataLoader";
+    import type {Contract} from '../../../data/Types';
+    import DataLoader from '../../../data/DataLoader';
 
     export let contract: Contract;
 

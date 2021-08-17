@@ -1,9 +1,9 @@
 <script lang="ts">
-    import type {Contract} from "../../../data/Types";
+    import type {Contract} from '../../../data/Types';
 
     export let contract: Contract;
 
-    let caption = !contract?.id ? 'Новый договор' : `Договор № "${contract?.number}" (${contract?.signDate})`;
+    let title = !contract?.id ? 'Новый договор' : `Договор № "${contract?.number}" (${contract?.signDate})`;
 </script>
 
 <style>
@@ -13,4 +13,4 @@
     }
 </style>
 
-<h3>{caption}</h3>
+<h3>{title}</h3>

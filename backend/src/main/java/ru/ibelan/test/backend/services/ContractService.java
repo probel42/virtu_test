@@ -37,7 +37,7 @@ public interface ContractService {
      * Расчитать страховую премию
      * @return страховая премия
      */
-    Float calcInsurancePremium(int insuranceAmount,
+    Long calcInsurancePremium(int insuranceAmount,
                                String realPropertyType,
                                Integer year,
                                Integer area,

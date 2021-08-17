@@ -19,8 +19,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import ru.ibelan.test.backend.entities.Person;
-import ru.ibelan.test.backend.services.PersonSearchService;
 import ru.ibelan.test.backend.repos.PersonRepository;
+import ru.ibelan.test.backend.services.PersonSearchService;
 
 import java.io.IOException;
 import java.nio.file.Files;

@@ -15,6 +15,6 @@ public class ContractInput {
     private String dateFrom;
     private String dateTo;
     private String calcDate;
-    private Float calcPremium;
+    private Long calcPremium;
     private String comment;
 }

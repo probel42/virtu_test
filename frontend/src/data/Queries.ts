@@ -78,7 +78,7 @@ export const CALC_INSURANCE_PREMIUM = gql`
     query CalcInsurancePremium(
         $insuranceAmount: Int!,
         $realPropertyType: String!,
-        $year: String!,
+        $year: Int!,
         $area: Int!,
         $dateFrom: String!,
         $dateTo: String!) {

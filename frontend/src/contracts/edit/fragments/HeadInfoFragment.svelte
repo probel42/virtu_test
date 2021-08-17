@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type {Contract} from "../../../data/Types";
+    import type {Contract} from '../../../data/Types';
 
     export let contract: Contract;
 </script>

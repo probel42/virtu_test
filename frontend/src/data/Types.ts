@@ -14,7 +14,7 @@ export type Address = {
 export type RealProperty = {
     address?: Address;
     type?: String;
-    year?: String;
+    year?: number;
     area?: number;
 }
 
@@ -45,7 +45,7 @@ export type Contract = {
 export type CalcInsuranceVariables = {
     insuranceAmount?: number;
     realPropertyType?: String;
-    year?: String
+    year?: number
     area?: number
     dateFrom?: String,
     dateTo?: String
@@ -69,7 +69,7 @@ export type PersonInput = {
     id?: String
     name: String;
     surname: String;
-    patronymic: String;
+    patronymic?: String;
     birthDate: String;
     passportSeries: String;
     passportNumber: String;

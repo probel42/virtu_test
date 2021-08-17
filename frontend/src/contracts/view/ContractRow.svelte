@@ -1,5 +1,6 @@
 <script lang="ts">
-    import type {Contract} from "../../data/Types";
+    import type {Contract} from '../../data/Types';
+    import {getPersonFullName} from '../../data/Utils';
 
     export let contract: Contract;
 
@@ -10,6 +11,7 @@
     tr {
         cursor: pointer;
     }
+
     tr td {
         border: 1px solid #5a5a5a;
         border-collapse: collapse;
@@ -33,7 +35,7 @@
 <tr on:click={openContract}>
     <td>{contract.number}</td>
     <td>{contract.signDate}</td>
-    <td>{contract.insured.surname} {contract.insured.name} {contract.insured.patronymic}</td>
+    <td>{getPersonFullName(contract.insured)}</td>
     <td>{contract.calcPremium}</td>
     <td>{contract.dateFrom} - {contract.dateTo}</td>
 </tr>

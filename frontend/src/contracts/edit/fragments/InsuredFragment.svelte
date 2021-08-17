@@ -1,17 +1,19 @@
 <script lang="ts">
-    import type {Contract, Person} from "../../../data/Types";
-    import DataLoader from "../../../data/DataLoader";
+    import type {Contract, Person} from '../../../data/Types';
+    import DataLoader from '../../../data/DataLoader';
     import {openModal} from 'svelte-modals'
     import PersonAddEdit from './PersonAddEdit.svelte'
+    import {getPersonFullName} from '../../../data/Utils';
 
     export let contract: Contract;
 
     let searchLine: String = '';
     let searchResult: Person[] = [];
+    let searchPerson = DataLoader.searchPerson();
 
     $: person = contract?.insured;
     $: isPersonSet = !!person?.id;
-    $: DataLoader.searchPerson(searchLine).then((result) => searchResult = result.persons);
+    $: searchPerson({search: searchLine}).then((result) => searchResult = result.data.persons);
 
     const changePerson = () => contract.insured = null;
 
@@ -94,7 +96,7 @@
         <div class="personPanel">
             <table id="selectedPerson" on:click={changePerson}>
                 <tr>
-                    <td>{person.surname} {person.name} {person.patronymic}</td>
+                    <td>{getPersonFullName(person)}</td>
                     <td>Дата рождения: {person.birthDate}</td>
                     <td>Пасспорт: {person.passportSeries} {person.passportNumber}</td>
                 </tr>
@@ -111,7 +113,7 @@
                 <table id="searchDropList">
                     {#each searchResult as person}
                         <tr on:click={setPerson(person)}>
-                            <td>{person.surname} {person.name} {person.patronymic}</td>
+                            <td>{getPersonFullName(person)}</td>
                             <td>Дата рождения: {person.birthDate}</td>
                             <td>Пасспорт: {person.passportSeries} {person.passportNumber}</td>
                         </tr>

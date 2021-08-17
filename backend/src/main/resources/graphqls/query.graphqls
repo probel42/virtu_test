@@ -11,9 +11,9 @@ type Query {
     calcInsurancePremium(
         insuranceAmount: Int!,
         realPropertyType: String!,
-        year: String!,
+        year: Int!,
         area: Int!,
         dateFrom: String!,
         dateTo: String!
-    ): Float
+    ): Int!
 }

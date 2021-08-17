@@ -1,6 +1,6 @@
 <script lang="ts">
-    import type {Contract} from "../../../data/Types";
-    import DataLoader from "../../../data/DataLoader";
+    import type {Contract} from '../../../data/Types';
+    import DataLoader from '../../../data/DataLoader';
 
     export let contract: Contract;
 
@@ -14,8 +14,10 @@
         dateFrom: contract.dateFrom,
         dateTo: contract.dateTo
     }
-    let calcPremium = DataLoader.calcInsurancePremium();
-    const reCalcPremium = () => calcPremium(calcVariables)
+    $: calcPremium = contract?.calcPremium ? (contract?.calcPremium / 100) : null;
+
+    let getInsurancePremium = DataLoader.calcInsurancePremium();
+    const reCalcPremium = () => getInsurancePremium(calcVariables)
         .then((result) => {
             contract.calcPremium = result.data.calcInsurancePremium;
             contract.calcDate = new Date().toISOString().substring(0, 10);
@@ -85,7 +87,7 @@
             <td><input disabled type="date" bind:value={contract.calcDate}/></td>
             <td>Премия</td>
             <td>
-                <input disabled type="text" bind:value={contract.calcPremium}>
+                <input disabled type="text" bind:value={calcPremium}>
             </td>
         </tr>
     </table>

@@ -1,8 +1,8 @@
 <script lang="ts">
     import ApolloClient from 'apollo-boost';
     import {setClient} from 'svelte-apollo';
-    import ContractPage from './contracts/view/ContractPage.svelte';
-    import ContractAddEdit from "./contracts/edit/ContractAddEdit.svelte";
+    import ContractView from './contracts/view/ContractView.svelte';
+    import ContractAddEdit from './contracts/edit/ContractAddEdit.svelte';
     import Router from 'svelte-spa-router'
 
     const env = _env;
@@ -10,7 +10,7 @@
     setClient(client);
 
     const routes = {
-        '/': ContractPage,
+        '/': ContractView,
         '/add': ContractAddEdit,
         '/contract/:id': ContractAddEdit
     }

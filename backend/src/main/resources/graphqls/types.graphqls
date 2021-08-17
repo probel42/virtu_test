@@ -40,6 +40,6 @@ type Contract {
     dateFrom: String
     dateTo: String
     calcDate: String
-    calcPremium: Float
+    calcPremium: Int
     comment: String
 }

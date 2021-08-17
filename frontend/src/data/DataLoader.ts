@@ -1,6 +1,6 @@
-import type {Contract, Person} from "./Types";
-import * as Queries from "./Queries";
-import {query, ReadableQuery} from "svelte-apollo";
+import type {Contract, Person} from './Types';
+import * as Queries from './Queries';
+import {query, ReadableQuery} from 'svelte-apollo';
 
 export default class DataLoader {
 
@@ -18,17 +18,9 @@ export default class DataLoader {
         return this.createPromise(query(Queries.GET_CONTRACT, opts));
     }
 
-    public static searchPerson(searchLine: String): Promise<{ persons: Person[] }> {
-        if (searchLine === null || searchLine.length === 0) {
-            return Promise.resolve({persons: []});
-        }
-        const opts = {variables: {search: searchLine}};
-        return this.createPromise(query(Queries.SEARCH_PERSONS, opts));
-    }
-
-    public static loadPerson(id: String): Promise<{ person: Person }> {
-        const opts = {variables: {id: id}};
-        return this.createPromise(query(Queries.GET_PERSON, opts));
+    public static searchPerson(): (opts) => Promise<{ data: { persons: Person[] } }> {
+        const q = query(Queries.SEARCH_PERSONS);
+        return (opts) => q.refetch(opts);
     }
 
     public static getRealPropertyTypes(): Promise<{ realPropertyTypes: String[] }> {

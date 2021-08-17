@@ -34,7 +34,7 @@ public class ContractQuery implements GraphQLQueryResolver {
         return contractService.getRealPropertyTypes();
     }
 
-    public Float calcInsurancePremium(int insuranceAmount,
+    public Long calcInsurancePremium(int insuranceAmount,
                                       String realPropertyType,
                                       Integer year,
                                       Integer area,

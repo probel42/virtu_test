@@ -1,6 +1,5 @@
 package ru.ibelan.test.backend.services;
 
-import org.apache.commons.math3.util.Precision;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -37,7 +36,7 @@ public class ContractServiceTest {
 
         // expectation
         float expected = (insuranceAmount * typeCoefficient * yearCoefficient * areaCoefficient) / period;
-        expected = Precision.round(expected, 2);
+        expected = (long) Math.round(expected * 100.0F);
         // reality
         float actual = contractService.calcInsurancePremium(insuranceAmount,
                 realPropertyType, year, area, startDate, endDate);

@@ -1,10 +1,10 @@
 <script lang="ts">
-    import type {Person} from "../../../data/Types";
-    import {mutation} from "svelte-apollo";
-    import {SAVE_PERSON} from "../../../data/Queries";
-    import {closeModal} from "svelte-modals";
-    import Converter from "../../../data/Converter";
-    import {NewPerson} from "../../../data/DataTemplates";
+    import type {Person} from '../../../data/Types';
+    import {mutation} from 'svelte-apollo';
+    import {SAVE_PERSON} from '../../../data/Queries';
+    import {closeModal} from 'svelte-modals';
+    import Converter from '../../../data/Converter';
+    import {NewPerson} from '../../../data/DataTemplates';
 
     export let isOpen;
     export let person: Person;

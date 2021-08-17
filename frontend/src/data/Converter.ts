@@ -1,4 +1,4 @@
-import type {Contract, ContractInput, Person, PersonInput} from "./Types";
+import type {Contract, ContractInput, Person, PersonInput} from './Types';
 
 export default class Converter {
     public static getContractInput(contract: Contract): ContractInput {

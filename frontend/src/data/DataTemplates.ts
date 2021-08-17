@@ -1,4 +1,4 @@
-import type {Contract, Person} from "./Types";
+import type {Contract, Person} from './Types';
 
 export let NewContract: Contract = {
     realProperty: {
