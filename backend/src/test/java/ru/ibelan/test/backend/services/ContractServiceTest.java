@@ -23,7 +23,7 @@ public class ContractServiceTest {
         String realPropertyType = "Квартира";
         String year = "2000";
         int area = 50;
-        // 357 дней
+        // 367 дней
         String startDate = "2020-01-01";
         String endDate = "2021-01-01";
 

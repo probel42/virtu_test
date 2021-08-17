@@ -24,14 +24,14 @@
         margin-left: auto;
     }
 
-    #contractsPaginator label {
+    #contractsPaginator div {
         margin: 0.4em;
     }
 </style>
 
 <div id="contractsPaginator">
-    <label>Страница:</label>
+    <div>Страница:</div>
     <button on:click={decrementPage} disabled="{currentPage === 1}">«</button>
-    <label>{currentPage}</label>
+    <div>{currentPage}</div>
     <button on:click={incrementPage} disabled="{currentPage >= pagesNumber}">»</button>
 </div>

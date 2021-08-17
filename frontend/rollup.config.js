@@ -73,6 +73,7 @@ export default {
 			_env: JSON.stringify({
 				SERVER_URI: process.env.SERVER_URI
 			}),
+			preventAssignment: true
 		}),
 
 		// In dev mode, call `npm run start` once

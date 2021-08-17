@@ -27,16 +27,17 @@
     <table>
         <tr>
             <td>
-                <label>
-                    {#await countriesPromise then data}
+                {#await countriesPromise then data}
+                    <label>
                         <select bind:value={contract.realProperty.address.country}>
                             {#each data.countries as country}
                                 <option value={country.name}>{country.name}</option>
                             {/each}
                         </select>
-                    {/await}
-                    государство
-                </label></td>
+                        государство
+                    </label>
+                {/await}
+            </td>
             <td><label><input type="text" bind:value={contract.realProperty.address.zipCode}/>индекс</label></td>
             <td><label><input type="text" bind:value={contract.realProperty.address.subject}/>республика, край, область</label></td>
             <td colspan="4"><label><input type="text" bind:value={contract.realProperty.address.district}/>район</label></td>

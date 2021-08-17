@@ -1,0 +1,4 @@
+FROM mongo:latest
+
+COPY src/main/resources/db/geo_init.json /data/init/geo_init.json
+CMD mongoimport --authenticationDatabase admin --host mongo --port 27017 -u insurance_app -p insurance_app --db insurance_address_ref --collection address_ref --type json --file /data/init/geo_init.json
