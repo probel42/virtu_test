@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.ibelan.test.backend.entities.Person;
 import ru.ibelan.test.backend.graphql.input.PersonInput;
 import ru.ibelan.test.backend.repos.PersonRepository;
-import ru.ibelan.test.backend.services.PersonCache;
+import ru.ibelan.test.backend.services.PersonSearchService;
 import ru.ibelan.test.backend.services.PersonService;
 
 import java.text.DateFormat;
@@ -18,18 +18,19 @@ import java.util.stream.Collectors;
 public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
-    private final PersonCache personCache;
+    private final PersonSearchService personSearchService;
 
     private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
-    PersonServiceImpl(PersonRepository personRepository, PersonCache personCache) {
+    PersonServiceImpl(PersonRepository personRepository, PersonSearchService personSearchService) {
         this.personRepository = personRepository;
-        this.personCache = personCache;
+        this.personSearchService = personSearchService;
     }
 
     @Override
     public List<Person> getPersons(String search) {
-        List<UUID> ids = personCache.search(search).stream().map(UUID::fromString).collect(Collectors.toList());
+        List<UUID> ids = personSearchService.search(search).stream().map(UUID::fromString)
+                .collect(Collectors.toList());
         List<Person> result = personRepository.findAllById(ids);
         result.sort(Comparator.comparing(AbstractPersistable::getId, Comparator.comparingInt(ids::indexOf)));
         return result;
@@ -51,8 +52,8 @@ public class PersonServiceImpl implements PersonService {
         person.setPassportNumber(personInput.getPassportNumber());
         Person result = personRepository.saveAndFlush(person);
 
-        // докинем к кэшу lucene
-        personCache.addPerson(person);
+        // докинем к lucene
+        personSearchService.addPerson(person);
 
         return Objects.requireNonNull(result.getId()).toString();
     }

@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import ru.ibelan.test.backend.entities.Person;
-import ru.ibelan.test.backend.services.PersonCache;
+import ru.ibelan.test.backend.services.PersonSearchService;
 import ru.ibelan.test.backend.repos.PersonRepository;
 
 import java.io.IOException;
@@ -30,7 +30,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Component
-public class PersonCacheImpl implements PersonCache {
+public class PersonSearchServiceImpl implements PersonSearchService {
     private static final int LOAD_PAGE_SIZE = 500;
     private static final String[] SEARCH_FIELDS = new String[]{
             "name",
@@ -44,9 +44,9 @@ public class PersonCacheImpl implements PersonCache {
 
     public Directory index;
 
-    public static final Logger LOG = LoggerFactory.getLogger(PersonCacheImpl.class);
+    public static final Logger LOG = LoggerFactory.getLogger(PersonSearchServiceImpl.class);
 
-    public PersonCacheImpl(PersonRepository personRepository) {
+    public PersonSearchServiceImpl(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
 

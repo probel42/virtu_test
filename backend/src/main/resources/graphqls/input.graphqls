@@ -14,7 +14,7 @@ input AddressInput {
 input RealPropertyInput {
     address: AddressInput!
     type: String!
-    year: String!
+    year: Int!
     area: Int!
 }
 

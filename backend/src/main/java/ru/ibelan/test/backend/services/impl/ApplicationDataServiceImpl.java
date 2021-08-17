@@ -12,6 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 
@@ -40,7 +41,7 @@ public class ApplicationDataServiceImpl implements ApplicationDataService {
     @Override
     public float getRealPropertyTypeCoefficient(String type) throws IOException {
         List<Map<String, Object>> data = getData(InsuranceDataType.REAL_PROPERTY_TYPE_COEFFICIENT);
-        return data.stream().filter(s -> type.equals(s.get("type"))).findFirst()
+        return data.stream().filter(s -> Objects.equals(type, s.get("type"))).findFirst()
                 .map(s -> (Double) s.get("coefficient")).map(Double::floatValue)
                 .orElseThrow(() -> new RuntimeException(String.format("Не найден тип \"%s\"", type)));
     }

@@ -16,7 +16,7 @@ type RealProperty {
     id: ID
     address: Address
     type: String
-    year: String
+    year: Int
     area: Int
 }
 

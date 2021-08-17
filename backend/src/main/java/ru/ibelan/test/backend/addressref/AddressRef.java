@@ -9,6 +9,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Адресные данные будем также хранить в Mongo (для удобства поиска и минимизации ошибок ввода)
+ */
 @Document(collection = "address_ref")
 @Getter
 @Setter

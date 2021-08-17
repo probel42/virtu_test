@@ -8,6 +8,6 @@ import lombok.Setter;
 public class RealPropertyInput {
     private AddressInput address;
     private String type;
-    private String year;
+    private Short year;
     private Short area;
 }

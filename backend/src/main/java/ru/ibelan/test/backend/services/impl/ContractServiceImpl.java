@@ -1,5 +1,6 @@
 package ru.ibelan.test.backend.services.impl;
 
+import org.apache.commons.math3.util.Precision;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.ibelan.test.backend.entities.Address;
@@ -9,7 +10,10 @@ import ru.ibelan.test.backend.entities.RealProperty;
 import ru.ibelan.test.backend.graphql.input.AddressInput;
 import ru.ibelan.test.backend.graphql.input.ContractInput;
 import ru.ibelan.test.backend.graphql.input.RealPropertyInput;
-import ru.ibelan.test.backend.repos.*;
+import ru.ibelan.test.backend.repos.AddressRepository;
+import ru.ibelan.test.backend.repos.ContractRepository;
+import ru.ibelan.test.backend.repos.PersonRepository;
+import ru.ibelan.test.backend.repos.RealPropertyRepository;
 import ru.ibelan.test.backend.services.AddressRefService;
 import ru.ibelan.test.backend.services.ApplicationDataService;
 import ru.ibelan.test.backend.services.ContractService;
@@ -86,7 +90,7 @@ public class ContractServiceImpl implements ContractService {
 
         // real property
         String realPropertyType = realPropertyInput.getType();
-        String year = realPropertyInput.getYear();
+        Short year = realPropertyInput.getYear();
         Short area = realPropertyInput.getArea();
 
         // person
@@ -106,8 +110,8 @@ public class ContractServiceImpl implements ContractService {
                 .orElseThrow(() -> new CalcInsuranceException("Не найдена указанная в договоре персона."));
 
         // пересчитаем премию заново (на случай если коэффициенты расчёта были изменены)
-        Float insurancePremium = calcInsurancePremium(contractInput.getInsuranceAmount(), realPropertyType, year,
-                area.intValue(), contractInput.getDateFrom(), contractInput.getDateTo());
+        Float insurancePremium = calcInsurancePremium(contractInput.getInsuranceAmount(), realPropertyType,
+                year.intValue(), area.intValue(), contractInput.getDateFrom(), contractInput.getDateTo());
         if (!Objects.equals(insurancePremium, contractInput.getCalcPremium())) {
             throw new CalcInsuranceException("Необходим перерасчёт страховой премии");
         }
@@ -154,8 +158,8 @@ public class ContractServiceImpl implements ContractService {
         contract.setInsuranceAmount(contractInput.getInsuranceAmount());
         contract.setDateFrom(DATE_FORMAT.parse(contractInput.getDateFrom()));
         contract.setDateTo(DATE_FORMAT.parse(contractInput.getDateTo()));
-        contract.setCalcPremium(contractInput.getCalcPremium().doubleValue());
         contract.setCalcDate(DATE_FORMAT.parse(contractInput.getCalcDate()));
+        contract.setCalcPremium((long) Math.round(contractInput.getCalcPremium() * 100));
         contract.setComment(contractInput.getComment());
         return contractRepository.saveAndFlush(contract);
     }
@@ -168,7 +172,7 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public Float calcInsurancePremium(int insuranceAmount,
                                       String realPropertyType,
-                                      String year,
+                                      Integer year,
                                       Integer area,
                                       String dateFrom,
                                       String dateTo) throws ParseException, IOException {
@@ -176,10 +180,10 @@ public class ContractServiceImpl implements ContractService {
         LocalDate endDate = DATE_FORMAT.parse(dateTo).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         long period = ChronoUnit.DAYS.between(startDate, endDate) + 1;
         float typeCoefficient = applicationDataService.getRealPropertyTypeCoefficient(realPropertyType);
-        float yearCoefficient = applicationDataService.getYearCoefficient(Integer.parseInt(year));
+        float yearCoefficient = applicationDataService.getYearCoefficient(year);
         float areaCoefficient = applicationDataService.getAreaCoefficient(area);
 
         float result = (insuranceAmount * typeCoefficient * yearCoefficient * areaCoefficient) / period;
-        return Math.round(result * 100.0F) / 100.0F;
+        return Precision.round(result, 2);
     }
 }

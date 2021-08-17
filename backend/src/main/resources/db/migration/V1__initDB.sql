@@ -62,7 +62,7 @@ CREATE TABLE public.real_property (
                                       id uuid NOT NULL,
                                       address_id uuid NOT NULL,
                                       type varchar(50) NOT NULL,
-                                      construction_year char(4) NOT NULL,
+                                      construction_year smallint NOT NULL,
                                       area smallint NOT NULL,
                                       CONSTRAINT real_property_pk PRIMARY KEY (id)
 
@@ -88,9 +88,10 @@ CREATE TABLE public.contract (
                                  date_from date NOT NULL,
                                  date_to date NOT NULL,
                                  calc_date date NOT NULL,
-                                 calc_premium real NOT NULL,
+                                 calc_premium bigint NOT NULL,
                                  comment text,
-                                 CONSTRAINT contract_pk PRIMARY KEY (id)
+                                 CONSTRAINT contract_pk PRIMARY KEY (id),
+                                 CONSTRAINT number_uniq UNIQUE (number)
 
 );
 COMMENT ON TABLE public.contract IS E'Договор';
@@ -101,8 +102,9 @@ COMMENT ON COLUMN public.contract.insurance_amount IS E'Страховая су�
 COMMENT ON COLUMN public.contract.date_from IS E'Срок действия с';
 COMMENT ON COLUMN public.contract.date_to IS E'Срок действия по';
 COMMENT ON COLUMN public.contract.calc_date IS E'Дата расчёта';
-COMMENT ON COLUMN public.contract.calc_premium IS E'Премия';
+COMMENT ON COLUMN public.contract.calc_premium IS E'Премия ( * 100 )';
 COMMENT ON COLUMN public.contract.comment IS E'Комментарий';
+COMMENT ON CONSTRAINT number_uniq ON public.contract  IS E'Номер должен быть уникальным';
 ALTER TABLE public.contract OWNER TO insurance_app;
 
 ALTER TABLE public.contract ADD CONSTRAINT person_fk FOREIGN KEY (insured_id)
@@ -112,5 +114,3 @@ ALTER TABLE public.contract ADD CONSTRAINT person_fk FOREIGN KEY (insured_id)
 ALTER TABLE public.contract ADD CONSTRAINT real_property_fk FOREIGN KEY (real_property_id)
     REFERENCES public.real_property (id) MATCH FULL
     ON DELETE CASCADE ON UPDATE CASCADE;
-
-

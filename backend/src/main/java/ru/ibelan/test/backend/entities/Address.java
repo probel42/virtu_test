@@ -9,39 +9,72 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.UUID;
 
+/**
+ * Адрес недвижимости
+ */
 @Entity
 @Table(name = "address")
 @Getter
 @Setter
 public class Address extends AbstractPersistable<UUID> {
 
+    /**
+     * Индекс
+     */
     @Column(name = "zipcode")
     private String zipCode;
 
-    @Column(name = "country")
+    /**
+     * Страна
+     */
+    @Column(name = "country", nullable = false)
     private String country;
 
-    @Column(name = "subject")
+    /**
+     * Республика, край, область
+     */
+    @Column(name = "subject", nullable = false)
     private String subject;
 
+    /**
+     * Район
+     */
     @Column(name = "district")
     private String district;
 
-    @Column(name = "settlement")
+    /**
+     * Населённый пункт
+     */
+    @Column(name = "settlement", nullable = false)
     private String settlement;
 
-    @Column(name = "street")
+    /**
+     * Улица
+     */
+    @Column(name = "street", nullable = false)
     private String street;
 
+    /**
+     * Дом
+     */
     @Column(name = "plot", nullable = false)
     private String plot;
 
+    /**
+     * Корпус
+     */
     @Column(name = "building")
     private String building;
 
+    /**
+     * Строение
+     */
     @Column(name = "housing")
     private String housing;
 
+    /**
+     * Квартира
+     */
     @Column(name = "apartment")
     private String apartment;
 }

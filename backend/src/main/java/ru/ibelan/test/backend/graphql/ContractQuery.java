@@ -36,7 +36,7 @@ public class ContractQuery implements GraphQLQueryResolver {
 
     public Float calcInsurancePremium(int insuranceAmount,
                                       String realPropertyType,
-                                      String year,
+                                      Integer year,
                                       Integer area,
                                       String dateFrom,
                                       String dateTo) throws ParseException, IOException {

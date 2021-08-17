@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -14,6 +15,6 @@ public class NamedLocation {
         if (locations == null) {
             return null;
         }
-        return locations.stream().filter(l -> name.equals(l.getName())).findFirst().orElse(null);
+        return locations.stream().filter(l -> Objects.equals(name, l.getName())).findFirst().orElse(null);
     }
 }

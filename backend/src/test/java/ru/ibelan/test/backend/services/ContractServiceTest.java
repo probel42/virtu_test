@@ -1,5 +1,6 @@
 package ru.ibelan.test.backend.services;
 
+import org.apache.commons.math3.util.Precision;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,7 +22,7 @@ public class ContractServiceTest {
     void calcInsuranceTest() throws ParseException, IOException {
         int insuranceAmount = 10000;
         String realPropertyType = "Квартира";
-        String year = "2000";
+        int year = 2000;
         int area = 50;
         // 367 дней
         String startDate = "2020-01-01";
@@ -31,12 +32,12 @@ public class ContractServiceTest {
         int period = 367;
         // coefficients
         float typeCoefficient = applicationDataService.getRealPropertyTypeCoefficient(realPropertyType);
-        float yearCoefficient = applicationDataService.getYearCoefficient(Integer.parseInt(year));
+        float yearCoefficient = applicationDataService.getYearCoefficient(year);
         float areaCoefficient = applicationDataService.getAreaCoefficient(area);
 
         // expectation
         float expected = (insuranceAmount * typeCoefficient * yearCoefficient * areaCoefficient) / period;
-        expected = Math.round(expected * 100.0F) / 100.0F;
+        expected = Precision.round(expected, 2);
         // reality
         float actual = contractService.calcInsurancePremium(insuranceAmount,
                 realPropertyType, year, area, startDate, endDate);
