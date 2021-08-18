@@ -78,9 +78,9 @@
             {/if}
         </table>
     </div>
+    <div id="contractButtons">
+        <button id="addContractButton" on:click={addContract}>Добавить договор</button>
+    </div>
 {:catch errorMessage}
     <Error {errorMessage}/>
 {/await}
-<div id="contractButtons">
-    <button id="addContractButton" on:click={addContract}>Добавить договор</button>
-</div>
