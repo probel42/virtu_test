@@ -20,6 +20,7 @@
 
 ## СТЕК
 * Backend:
+  * Java 11
   * Spring Boot 2
   * Tomcat
   * Postgres 13
